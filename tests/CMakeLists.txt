@@ -1,6 +1,14 @@
 include(Catch)
 
-add_executable(ft_skyjo_tests version_tests.cpp)
+add_executable(ft_skyjo_tests)
+
+target_sources(
+    ft_skyjo_tests
+    PRIVATE
+        card_tests.cpp
+        deck_tests.cpp
+        version_tests.cpp
+)
 
 target_link_libraries(
     ft_skyjo_tests

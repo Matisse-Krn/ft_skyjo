@@ -62,3 +62,18 @@ area exists.
 8. A player's tableau has twelve fixed positions; a removed column leaves empty positions.
 9. Network timeout and disconnection policy is separated from the physical game rules.
 10. Every ambiguous rule or deliberate variant is recorded in `rules-decisions.md`.
+
+## Card model
+
+A physical card is represented by two immutable-from-the-public-API properties:
+
+- `CardId`: the unique identity of the physical card;
+- `CardValue`: the validated scoring value, restricted to the range `[-2, 12]`.
+
+Two cards may have the same value but must never share the same identifier.
+
+Visibility, ownership, position and current state zone do not belong to `Card`. These
+properties will be represented by round-state structures containing card identifiers.
+
+Canonical deck construction is deterministic. Shuffling and all other random behavior
+will be handled by a separate injectable random source.
