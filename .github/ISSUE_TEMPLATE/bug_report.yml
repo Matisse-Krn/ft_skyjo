@@ -1,0 +1,36 @@
+name: Bug report
+description: Report incorrect behavior or a regression
+title: "bug: "
+labels:
+  - bug
+body:
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+      description: Describe the observed behavior.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Reproduction steps
+      description: Include the random seed and command sequence when relevant.
+    validations:
+      required: true
+  - type: textarea
+    id: rule
+    attributes:
+      label: Related rule or decision
+      description: Reference the official rule or `docs/rules-decisions.md`.
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      description: OS, compiler, CMake version, and build preset.
