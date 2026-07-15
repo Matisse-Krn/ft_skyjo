@@ -1,0 +1,36 @@
+# CMake build trees
+/build/
+/cmake-build-*/
+
+# Local CMake presets
+CMakeUserPresets.json
+
+# Generated compilation database symlink or copy
+compile_commands.json
+
+# Editor and IDE state
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Debugger and profiling output
+*.core
+core
+vgcore.*
+
+# Coverage output
+coverage/
+*.gcda
+*.gcno
+*.gcov
+
+# OS metadata
+.DS_Store
+Thumbs.db
+
+# Local environment files
+.env
+.env.*
+!.env.example

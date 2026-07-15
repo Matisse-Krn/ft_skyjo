@@ -1,0 +1,32 @@
+name: Feature request
+description: Propose a scoped project change
+title: "feat: "
+labels:
+  - enhancement
+body:
+  - type: textarea
+    id: context
+    attributes:
+      label: Context
+      description: Explain the problem, not only the proposed implementation.
+    validations:
+      required: true
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Acceptance criteria
+      description: List observable completion conditions.
+    validations:
+      required: true
+  - type: textarea
+    id: edge-cases
+    attributes:
+      label: Edge cases
+  - type: textarea
+    id: tests
+    attributes:
+      label: Required tests
+  - type: textarea
+    id: documentation
+    attributes:
+      label: Documentation impact
