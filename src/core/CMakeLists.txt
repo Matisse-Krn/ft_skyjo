@@ -4,6 +4,7 @@ add_library(ft_skyjo::core ALIAS ft_skyjo_core)
 target_sources(
     ft_skyjo_core
     PRIVATE
+        deck.cpp
         version.cpp
 )
 
