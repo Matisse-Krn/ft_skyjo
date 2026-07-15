@@ -17,7 +17,8 @@ compile_commands.json
 
 # Debugger and profiling output
 *.core
-core
+/core
+/core.*
 vgcore.*
 
 # Coverage output
