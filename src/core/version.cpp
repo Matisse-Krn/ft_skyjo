@@ -1,6 +1,7 @@
 #include "ft_skyjo/version.hpp"
 
-namespace ft_skyjo {
+namespace ft_skyjo
+{
 
 std::string_view project_name() noexcept
 {
