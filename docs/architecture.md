@@ -77,3 +77,75 @@ properties will be represented by round-state structures containing card identif
 
 Canonical deck construction is deterministic. Shuffling and all other random behavior
 will be handled by a separate injectable random source.
+
+## Card identity, catalog and ownership
+
+Physical-card definition and mutable card location are separate concerns.
+
+### Immutable card data
+
+One immutable card catalog defines the complete physical deck:
+
+```text
+CardId → CardValue
+```
+
+A `CardId` is unique inside one match deck. Its numeric value has no game meaning and must not be
+used to infer the card value or current location.
+
+### Mutable ownership zones
+
+Mutable round state stores only card identifiers.
+
+Stable card-owning zones are:
+
+- draw pile;
+- discard pile;
+- fixed player tableau slots;
+- optional private pending-card zone.
+
+The card catalog is not an ownership zone.
+
+At every stable observable state, every canonical identifier must appear in exactly one mutable
+zone.
+
+### Tableau state
+
+Visibility belongs to a tableau position rather than to the physical card.
+
+A position is conceptually:
+
+```text
+Empty
+Hidden(CardId)
+Revealed(CardId)
+```
+
+Removed columns leave three empty fixed positions.
+
+### Pending-card state
+
+Drawing from the hidden pile creates an explicit pending-card state owned by the active turn.
+
+This state persists until the player either:
+
+- swaps the pending card into the tableau;
+- or discards it and reveals a hidden tableau position.
+
+### Atomic transitions
+
+Card movement is atomic at command boundaries.
+
+A failed command leaves the previously observable state unchanged. A successful command publishes
+a complete new valid state.
+
+### Information security
+
+Stable internal card identifiers must not be exposed for hidden cards in player or spectator
+projections.
+
+The authoritative engine may know a hidden `CardId`, while a recipient projection exposes only a
+hidden-card marker.
+
+The complete decision is recorded in
+[`ADR-0001`](adr/0001-card-storage-and-movement.md).

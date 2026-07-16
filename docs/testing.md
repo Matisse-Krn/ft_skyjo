@@ -39,3 +39,30 @@ ctest --preset asan-ubsan
 - replay files containing seed, initial state, command identifiers, and expected events;
 - thread sanitizer tests only after concurrent infrastructure exists;
 - coverage reports used as diagnostic information, not as a substitute for scenario quality.
+
+## Card ownership and movement validation
+
+Future invariant and scenario tests must validate the card-storage decision recorded in
+`ADR-0001`.
+
+At every stable test state, collect identifiers from:
+
+- draw pile;
+- discard pile;
+- every player tableau;
+- pending-card state, when present.
+
+Compare the resulting multiset with the canonical card-catalog identifiers.
+
+Tests must fail with structured diagnostics when an identifier is:
+
+- missing;
+- duplicated;
+- unknown;
+- present in several zones.
+
+Movement scenario tests must compare the full state before and after rejected operations to verify
+that failures produce no observable mutation.
+
+Projection tests must verify that hidden cards expose neither their value nor their stable internal
+identifier.
