@@ -75,28 +75,68 @@ A player's consecutive auto-play counter:
 
 The random selection is server-authoritative, seedable in tests, and recorded in the event log.
 
-### Voluntary abandonment and connection loss
+### Initial two-card selection timeout
 
-**Status:** accepted in principle; card disposition and result classification remain unresolved.
+**Status:** accepted at product-policy level; exact duration remains configurable.
 
-Voluntary abandonment, connection timeout, and three consecutive auto-played turns enter the same
-player-withdrawal workflow. A later AI module may assume control instead of withdrawing the
-player.
+Every player must reveal exactly two distinct hidden tableau cards before the first
+turn begins.
 
-The match continues only while at least two real active players remain.
+When the selection deadline expires, the server completes the selection through the
+match random source:
+
+1. if no card has been selected, select two distinct valid hidden positions;
+2. if one card has been selected, select one different valid hidden position;
+3. if two valid cards have already been selected, perform no automatic action.
+
+The automatic selection is server-authoritative, seedable in tests and recorded in
+the event log.
+
+### Definitive player withdrawal
+
+**Status:** accepted.
+
+The following situations enter the same definitive withdrawal workflow:
+
+- voluntary abandonment;
+- expiration of the configured reconnection or connection-loss policy;
+- three consecutive completely auto-played turns.
+
+A definitively withdrawn human player:
+
+- receives a loss;
+- is removed from the active-human set;
+- is removed from the normal turn rotation;
+- is excluded from final and tied-winner eligibility.
+
+The player's tableau remains present and inert until round cleanup. Its cards are not
+returned immediately to the draw pile or discard pile.
+
+If withdrawal occurs while a card or partial action is pending, the server first
+completes one valid legal resolution atomically. No pending card may remain after
+withdrawal becomes stable.
+
+A future bot may continue controlling the seat, but bot takeover does not cancel the
+human player's loss or restore that human's winner eligibility.
+
+### Last active human
+
+**Status:** accepted.
+
+When exactly one real active human remains, the match ends by forfeit and that human
+is declared the winner.
+
+This remains true when one or more abandoned seats are still controlled by bots.
 
 ## Unresolved decisions
 
-The following points must be resolved before networking or persistence is implemented:
+The following points must be resolved before networking or persistence is complete:
 
-1. Exact ready-check, connection-loss, and turn durations.
-2. Whether a briefly disconnected player receives a reconnection grace period before withdrawal.
-3. What happens to a withdrawn player's tableau, pending card, cumulative score, and physical
-   cards when no AI replaces them.
-4. Whether the last remaining real active player wins by forfeit or the match is recorded as
-   aborted.
-5. Whether a withdrawn player is always recorded as a loss and excluded from tied winners.
-6. How match statistics distinguish disconnect, timeout, voluntary abandonment, and technical
-   cancellation.
-7. Whether initial two-card selection is automatic or causes ejection when the player times out.
-8. Maximum number of rock-paper-scissors replays before a fully random fallback, if any.
+1. Exact ready-check, initial-selection, turn and connection-loss durations.
+2. Exact reconnection grace-period behavior.
+3. The result when no real active human remains.
+4. How match statistics distinguish voluntary abandonment, timeout, connection loss
+   and technical cancellation.
+5. Whether rock-paper-scissors needs a maximum replay count before a random fallback.
+6. Whether, when and in which match modes bot takeover is offered.
+7. How bot-controlled seat outcomes and statistics are recorded.

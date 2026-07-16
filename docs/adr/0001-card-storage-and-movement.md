@@ -4,7 +4,7 @@
 - **Date:** 2026-07-16
 - **Decision owners:** ft_skyjo maintainers
 - **Related issues:** #3, #5, #6
-- **Implementation follow-up:** issue implementing the immutable card catalog
+- **Implementation follow-up:** [#19 — Implement immutable card catalog and canonical card-id sequence](https://github.com/Matisse-Krn/ft_skyjo/issues/19)
 
 ## Context
 

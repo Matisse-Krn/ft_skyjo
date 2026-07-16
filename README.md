@@ -1,8 +1,10 @@
 # ft_skyjo
 
-`ft_skyjo` is a private C++20 proof of concept for a deterministic, testable, and
-server-authoritative implementation of a Skyjo-like card game. It is preparatory work for a
-possible game component in the 42 `ft_transcendence` project.
+`ft_skyjo` is a public C++20 proof of concept for a deterministic, testable,
+and server-authoritative implementation of a Skyjo-like card game.
+
+It is preparatory work for a possible game component in the 42
+`ft_transcendence` project.
 
 The current repository contains only the engineering foundation:
 
@@ -76,9 +78,12 @@ See [`CONTRIBUTING.md`](CONTRIBUTING.md).
 ## Documentation
 
 - [`docs/architecture.md`](docs/architecture.md)
+- [`docs/invariants.md`](docs/invariants.md)
 - [`docs/rules.md`](docs/rules.md)
 - [`docs/rules-decisions.md`](docs/rules-decisions.md)
 - [`docs/testing.md`](docs/testing.md)
+- [`docs/adr/README.md`](docs/adr/README.md)
+- [`ADR-0001: Card storage and movement`](docs/adr/0001-card-storage-and-movement.md)
 
 ## External dependency
 
@@ -88,5 +93,11 @@ the official repository at the immutable release commit
 
 ## License and branding
 
-No public license has been selected. The repository is private. The project name and branding
-must be reviewed before any public release.
+This repository is publicly visible but currently has no open-source license.
+
+Unless a license is added, default copyright rules apply: public visibility does
+not grant general permission to use, modify or redistribute the source code beyond
+the rights provided by GitHub's Terms of Service.
+
+The project name, branding and final licensing policy must be reviewed before a
+stable release or integration into the final `ft_transcendence` project.
